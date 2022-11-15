@@ -1,0 +1,40 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+    .btn {
+        @apply inline-block rounded border border-transparent px-4 py-2 text-center text-sm font-medium leading-5 text-white outline-none transition-colors duration-150 hover:bg-gray-700 active:bg-gray-600;
+        background-color: #3490dc;
+    }
+
+    .form-label {
+        @apply mb-2 block text-sm font-bold text-gray-700;
+    }
+    .form-input,
+    .form-select,
+    .form-textarea {
+        @apply w-full appearance-none rounded border py-2 px-3 leading-tight text-gray-700 shadow !ring-0 hover:border-blue-600 focus:outline-none;
+    }
+    .form-select {
+        @apply truncate pr-8;
+    }
+    .form-textarea {
+        @apply min-h-[80px];
+    }
+    .form-checkbox,
+    .form-radio {
+        @apply h-4 w-4 text-blue-600 !shadow-none !outline-none !ring-0;
+    }
+}
+
+.toast-notification {
+    @apply flex max-w-sm items-center rounded bg-white py-2 px-4 text-white will-change-transform;
+    box-shadow: 0 3px 10px rgb(0 0 0 / 10%), 0 3px 3px rgb(0 0 0 / 5%);
+}
+.toast-notification.toast-success {
+    @apply bg-green-600;
+}
+.toast-notification.toast-error {
+    @apply bg-red-600;
+}
