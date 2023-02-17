@@ -1,5 +1,12 @@
+import Portals from '../Portals';
+
 const DefaultLayout = ({ children }) => {
-    return children;
+    return (
+        <>
+            {children}
+            <Portals />
+        </>
+    );
 };
 
 export default DefaultLayout;

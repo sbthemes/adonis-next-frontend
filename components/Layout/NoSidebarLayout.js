@@ -1,6 +1,11 @@
+import Portals from '../Portals';
+
 const NoSidebarLayout = ({ children }) => {
     return (
-        <div className="bg-[#F5F7FA] font-SourceSansPro text-base leading-5 text-black antialiased">{children}</div>
+        <div className="font-SourceSansPro bg-[#F5F7FA] text-base leading-5 text-black antialiased">
+            {children}
+            <Portals />
+        </div>
     );
 };
 
