@@ -1,4 +1,5 @@
 import { useAuth } from '@/hooks/useAuth';
+import { IAuthResetPassword } from '@/types/auth';
 import { Field, Form, Formik } from 'formik';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -7,7 +8,7 @@ import { useEffect } from 'react';
 const ResetPassword = () => {
     const router = useRouter();
     const { resetPassword } = useAuth();
-    const params = { password: 'sb123admin', password_confirmation: 'sb123admin' };
+    const params: IAuthResetPassword = { password: 'sb123admin', password_confirmation: 'sb123admin' };
 
     useEffect(() => {
         if (router.isReady && !router.query.token) {
@@ -15,7 +16,7 @@ const ResetPassword = () => {
         }
     }, [router]);
 
-    const formHandler = async (values) => {
+    const formHandler = async (values: IAuthResetPassword) => {
         await resetPassword(values);
     };
 

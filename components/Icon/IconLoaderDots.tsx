@@ -1,4 +1,10 @@
-const IconLoaderDots = ({ className }) => {
+import { FC } from 'react';
+
+interface IconLoaderDotsProps {
+    className?: string;
+}
+
+const IconLoaderDots: FC<IconLoaderDotsProps> = ({ className }) => {
     return (
         <svg
             className={className}

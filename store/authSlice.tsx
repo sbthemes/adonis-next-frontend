@@ -1,11 +1,16 @@
 import axios from '@/libs/axios';
 import { destroyCookie } from '@/libs/cookie';
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, Dispatch } from '@reduxjs/toolkit';
+
+interface AuthSliceState {
+    status: string;
+    user: any;
+}
 
 const initialState = {
     status: 'loading',
     user: null,
-};
+} as AuthSliceState;
 
 const authSlice = createSlice({
     name: 'auth',
@@ -29,7 +34,7 @@ const authSlice = createSlice({
 });
 
 export const fetchUser = () => {
-    return async (dispatch) => {
+    return async (dispatch: Dispatch) => {
         try {
             const { data } = await axios.get('/auth/user');
             dispatch(setUser(data.user));

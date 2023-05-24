@@ -1,11 +1,20 @@
-import Auth from '@/components/Layout/Auth';
 import NoAuth from '@/components/Layout/NoAuth';
-import { useEffect } from 'react';
+import { ReactNode, useEffect } from 'react';
 import { useAuth } from '@/hooks/useAuth';
 import NoSidebarLayout from '@/components/Layout/NoSidebarLayout';
 import DefaultLayout from '@/components/Layout/DefaultLayout';
+import Auth from './Auth';
 
-const Site = ({ children, middleware, layout }) => {
+interface SiteProps {
+    children: ReactNode;
+    layout?: 'default' | 'nosidebar';
+    middleware?: {
+        auth?: boolean;
+        verify?: boolean;
+    };
+}
+
+const Site = ({ children, middleware, layout }: SiteProps) => {
     const { fetchUser } = useAuth();
 
     useEffect(() => {

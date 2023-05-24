@@ -1,6 +1,11 @@
-import IconLoaderDots from '@/components/Icon/IconLoaderDots';
+import { FC } from 'react';
+import IconLoaderDots from './Icon/IconLoaderDots';
 
-const Loading = ({ message }) => {
+interface LoadingProps {
+    message?: string;
+}
+
+const Loading: FC<LoadingProps> = ({ message }) => {
     return (
         <div className="fixed inset-0 z-[9999] flex min-h-[100vh] w-full flex-col items-center justify-center bg-white">
             <div>

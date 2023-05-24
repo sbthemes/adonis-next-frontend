@@ -1,8 +1,8 @@
 import nookies from 'nookies';
 
 export const setCookie = (
-    key,
-    value,
+    key: string,
+    value: any,
     ctx = null,
     args = {
         maxAge: 31536000,
@@ -13,10 +13,10 @@ export const setCookie = (
     nookies.set(ctx, key, value, args);
 };
 
-export const getCookie = (key, ctx = null) => {
+export const getCookie = (key: string, ctx = null) => {
     return nookies.get(ctx)[key];
 };
 
-export const destroyCookie = (key, ctx = null) => {
+export const destroyCookie = (key: string, ctx = null) => {
     return nookies.destroy(ctx, key);
 };

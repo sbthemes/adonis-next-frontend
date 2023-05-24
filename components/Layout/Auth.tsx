@@ -1,11 +1,17 @@
+import { IRootState } from '@/store/store';
 import { useRouter } from 'next/router';
-import { useEffect } from 'react';
+import { ReactNode, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import Loading from '../Loading';
 
-const Auth = ({ children, verify: verificationRequired }) => {
+interface AuthProps {
+    children: ReactNode;
+    verify?: boolean;
+}
+
+const Auth = ({ children, verify: verificationRequired }: AuthProps): JSX.Element => {
     const router = useRouter();
-    const { status, user } = useSelector((state) => state.auth);
+    const { status, user } = useSelector((state: IRootState) => state.auth);
     const isVerified = user?.email_verified_at;
 
     useEffect(() => {
@@ -22,7 +28,7 @@ const Auth = ({ children, verify: verificationRequired }) => {
         return <Loading />;
     }
 
-    return children;
+    return <>{children}</>;
 };
 
 export default Auth;

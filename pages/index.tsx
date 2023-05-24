@@ -1,7 +1,7 @@
 import { useAuth } from '@/hooks/useAuth';
 import toast from '@/libs/toast';
 
-const Home = () => {
+const Index = () => {
     const { logout } = useAuth();
 
     return (
@@ -113,9 +113,9 @@ const Home = () => {
     );
 };
 
-export default Home;
+export default Index;
 
-Home.middleware = {
+Index.middleware = {
     auth: true,
     verify: true,
 };

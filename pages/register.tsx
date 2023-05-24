@@ -1,13 +1,19 @@
 import { useAuth } from '@/hooks/useAuth';
+import { IAuthRegister } from '@/types/auth';
 import { Field, Form, Formik } from 'formik';
 import Link from 'next/link';
 
-const Login = () => {
-    const { login } = useAuth();
-    const params = { email: 'sbthemes@gmail.com', password: 'sb123admin' };
+const Register = () => {
+    const { register } = useAuth();
+    const params: IAuthRegister = {
+        name: 'Shailesh Savaliya',
+        email: 'sbthemes@gmail.com',
+        password: 'sb123admin',
+        password_confirmation: 'sb123admin',
+    };
 
-    const formHandler = async (values) => {
-        await login(values);
+    const formHandler = async (values: IAuthRegister) => {
+        await register(values);
     };
 
     return (
@@ -17,11 +23,22 @@ const Login = () => {
             </div>
             <div className="flex min-h-[calc(100vh-77px)] items-center justify-center p-4">
                 <div className="mx-auto w-full max-w-[600px] space-y-[25px] rounded bg-white p-[25px]">
-                    <h1 className="text-center text-[22px] font-semibold leading-7">Sign in</h1>
-
+                    <h1 className="text-center text-[22px] font-semibold leading-7">Sign up</h1>
                     <Formik initialValues={params} onSubmit={formHandler}>
                         {({ isSubmitting }) => (
                             <Form className="space-y-4">
+                                <div>
+                                    <label className="form-label">Full name</label>
+                                    <div>
+                                        <Field
+                                            name="name"
+                                            type="text"
+                                            className="form-input"
+                                            placeholder="Full name..."
+                                        />
+                                    </div>
+                                </div>
+
                                 <div>
                                     <label className="form-label">Email address</label>
                                     <div>
@@ -47,29 +64,33 @@ const Login = () => {
                                 </div>
 
                                 <div>
-                                    <Link
-                                        href="/forgot-password"
-                                        className="text-darkblue hover:text-primary underline transition-all duration-300"
-                                    >
-                                        Forgot Password
-                                    </Link>
+                                    <label className="form-label">Confirm password</label>
+                                    <div>
+                                        <Field
+                                            name="password_confirmation"
+                                            type="password"
+                                            className="form-input"
+                                            placeholder="Password..."
+                                        />
+                                    </div>
                                 </div>
-                                <div>
+
+                                <div className="text-right">
                                     <button disabled={isSubmitting} type="submit" className="btn mt-6 block w-full">
-                                        Login
+                                        Sign up
                                     </button>
                                 </div>
                             </Form>
                         )}
                     </Formik>
 
-                    <p className="text-lightblack text-center">
+                    <p className=" text-lightblack text-center">
                         Not registered?{' '}
                         <Link
-                            href="/register"
+                            href="/login"
                             className="text-darkblue hover:text-primary underline transition-all duration-300"
                         >
-                            Sign up
+                            Sign in
                         </Link>
                         .
                     </p>
@@ -79,10 +100,10 @@ const Login = () => {
     );
 };
 
-export default Login;
+export default Register;
 
-Login.middleware = {
+Register.middleware = {
     auth: false,
 };
 
-Login.layout = 'nosidebar';
+Register.layout = 'nosidebar';

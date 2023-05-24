@@ -1,6 +1,6 @@
 import Axios from 'axios';
-import { getCookie } from '@/libs/cookie';
-import toast from '@/libs/toast';
+import { getCookie } from './cookie';
+import toast from './toast';
 
 const axios = Axios.create({
     baseURL: process.env.NEXT_PUBLIC_API_URL,
@@ -41,8 +41,6 @@ axios.interceptors.response.use(
             toast.error(error.response.data.message);
         }
 
-        // Any status codes that falls outside the range of 2xx cause this function to trigger
-        // Do something with response error
         return Promise.reject(error);
     }
 );

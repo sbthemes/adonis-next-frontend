@@ -1,4 +1,5 @@
 import { useAuth } from '@/hooks/useAuth';
+import { IAuthForgotPassword } from '@/types/auth';
 import { Field, Form, Formik } from 'formik';
 import Link from 'next/link';
 
@@ -6,7 +7,7 @@ const ForgotPassword = () => {
     const { forgotPassword } = useAuth();
     const params = { email: 'sbthemes@gmail.com' };
 
-    const formHandler = async (values) => {
+    const formHandler = async (values: IAuthForgotPassword) => {
         await forgotPassword(values);
     };
 
