@@ -1,14 +1,16 @@
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import axios from '@/libs/axios';
 import { useRouter } from 'next/router';
 import { getCookie, setCookie } from '@/libs/cookie';
 import { fetchUser as getUser, setLogout } from '@/store/authSlice';
 import { useCallback } from 'react';
 import { IAuthForgotPassword, IAuthLogin, IAuthRegister, IAuthResetPassword } from '@/types/auth';
+import { IRootState } from '@/store/store';
 
 export const useAuth = () => {
     const router = useRouter();
     const dispatch = useDispatch();
+    const { status, user: authUser } = useSelector((state: IRootState) => state.auth);
 
     const fetchUser = useCallback(() => {
         try {
@@ -70,6 +72,14 @@ export const useAuth = () => {
         dispatch(setLogout());
     };
 
+    const isLoggedIn = status === 'authenticated' && !!authUser;
+
+    const isAdmin = isLoggedIn && !!authUser?.is_admin;
+
+    const isSubscribed = isLoggedIn && !!authUser?.is_subscribed;
+
+    const user = (isLoggedIn && authUser) || null;
+
     return {
         fetchUser,
         register,
@@ -79,5 +89,9 @@ export const useAuth = () => {
         resendEmailVerification,
         verifyEmail,
         logout,
+        isLoggedIn,
+        isAdmin,
+        isSubscribed,
+        user,
     };
 };
